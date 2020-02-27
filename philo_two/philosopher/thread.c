@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:27:29 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/24 15:35:55 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/02/25 17:21:51 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void			ft_thread(t_philo *philo, t_info *info)
 	{
 		pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 		i++;
+		usleep(35);
 	}
 }
 
@@ -83,6 +84,5 @@ int				ft_threading(t_info *info)
 	ft_thread(philo, info);
 	ft_is_dead(philo, info, before);
 	sem_close(speak);
-	sem_close(semaphore);
 	return (0);
 }

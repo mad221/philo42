@@ -6,7 +6,7 @@
 /*   By: mpouzol <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:23:54 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/24 16:25:12 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/02/25 16:02:25 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	ft_is_num(const char *str)
 	int i;
 
 	i = 0;
+	if (str[0] == '-' || str[0] == '0')
+		return (-1);
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')

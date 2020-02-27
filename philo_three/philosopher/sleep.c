@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:27:18 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/25 09:38:55 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/02/26 14:13:43 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,17 @@ int			ft_think(t_philo *philo)
 	return (0);
 }
 
-void		ft_is_dead(t_philo *philo, t_info *info)
+void		*ft_dead(t_philo *philo)
 {
-	int				i;
-	int				stop;
-
-	stop = 0;
-	i = 0;
-	while (stop != 1)
+	while (1)
 	{
-		if (i == info->number)
-			i = 0;
-		if (ft_get_time() - philo[i].rest_bf_die > philo[i].time_die)
+		if (ft_get_time() - philo->rest_bf_die > philo->time_die)
 		{
+			sem_wait(philo->speak);
 			ft_print(" is dead \n", philo);
-			stop = 1;
+			sem_post(philo->exit);
+			exit(1);
 		}
-		i++;
 	}
+	return (NULL);
 }

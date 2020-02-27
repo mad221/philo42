@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpouzol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:17:52 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/24 16:23:25 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/02/27 16:26:05 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ pthread_mutex_t *mutex)
 	philo->rest_bf_die = ft_get_time();
 	philo->mutex = mutex;
 	philo->begin = ft_get_time();
+	philo->eat = info->eat;
 	return (0);
 }
 
@@ -79,13 +80,13 @@ int					ft_threading(t_info *info)
 		ft_set_value(&philo[i], info, i, mutex);
 		i++;
 	}
-	gettimeofday(&before, NULL);
 	i = 0;
 	while (i < info->number)
 	{
 		pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 		i++;
+		usleep(35);
 	}
-	ft_is_dead(philo, info, before);
+	ft_is_dead(philo, info);
 	return (0);
 }

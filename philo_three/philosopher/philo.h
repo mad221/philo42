@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:44:39 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/25 09:37:36 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/02/26 15:18:20 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,24 @@ typedef struct	s_philo
 	long long	begin;
 	sem_t		*semaphore;
 	sem_t		*speak;
+	sem_t		*exit;
 	pthread_t	thread;
+	int			pid;
 }				t_philo;
 
-void			ft_is_dead(t_philo *philo, t_info *info);
+void			*ft_dead(t_philo *philo);
 int				ft_think(t_philo *philo);
 int				ft_sleep(t_philo *philo);
 int				ft_eat(t_philo *philo);
-int				ft_process(t_info *info);
+int				ft_process(t_info *info, t_philo *philo);
 int				ft_parsing(t_info *info, char **av);
 int				ft_atoi_base(const char *nptr, const char *base);
 long long		ft_get_time(void);
 void			ft_print(char *str, t_philo *philo);
 void			ft_thread(t_philo *philo, t_info *info);
 void			ft_unlink(void);
+int				ft_set_value(t_philo *philo, t_info *info);
+void			ft_set_sem(t_philo *philo, sem_t *s, sem_t *e, sem_t *q);
+void			ft_kill(int *pid, t_info *info, t_philo *philo);
 
 #endif

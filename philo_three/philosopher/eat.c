@@ -3,19 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   eat.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpouzol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:11:10 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/24 15:40:02 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/02/25 17:23:54 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_eat(t_philo *philo)
+void	ft_take_fork(t_philo *philo)
+{
+	sem_wait(philo->speak);
+	ft_print(" has taken a fork\n", philo);
+	sem_post(philo->speak);
+}
+
+int		ft_eat(t_philo *philo)
 {
 	sem_wait(philo->semaphore);
+	ft_take_fork(philo);
 	sem_wait(philo->semaphore);
+	ft_take_fork(philo);
 	philo->rest_bf_die = ft_get_time();
 	sem_wait(philo->speak);
 	ft_print(" is eating\n", philo);

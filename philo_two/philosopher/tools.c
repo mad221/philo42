@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpouzol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:36:32 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/24 15:38:50 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/02/25 17:26:36 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	ft_is_num(const char *str)
 	int i;
 
 	i = 0;
+	if (str[0] == '-' || str[0] == '0')
+		return (-1);
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
