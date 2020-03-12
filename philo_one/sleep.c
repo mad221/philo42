@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:15:02 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/03/12 14:39:34 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 15:35:26 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,14 @@ void		ft_is_dead(t_philo *philo, t_info *info)
 	{
 		if (i == info->number)
 			i = 0;
+		if (ft_all_eat(philo, info->number) == 1)
+			return ;
 		if (ft_get_time() - philo[i].rest_bf_die > philo[i].time_die)
 		{
 			pthread_mutex_lock(&philo->mutex[philo->philo_total]);
 			ft_print(" is died \n", philo);
 			return ;
 		}
-		stop = ft_all_eat(philo, info->number);
 		i++;
 	}
 }

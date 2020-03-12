@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:17:52 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/03/12 14:06:36 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 15:32:56 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,12 @@ void				*ft_live(void *arg)
 	while (1)
 	{
 		if (ft_eat(philo) == 1)
+		{
 			if (ft_sleep(philo) == 1)
 				ft_think(philo);
+		}
+		else
+			while (1);
 	}
 }
 
@@ -87,5 +91,6 @@ int					ft_threading(t_info *info)
 		usleep(50);
 	}
 	ft_is_dead(philo, info);
+	free(philo);
 	return (0);
 }
