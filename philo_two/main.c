@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:04:50 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/03/12 11:08:52 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 14:56:31 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ int		main(int ac, char **av)
 			return (0);
 		ft_threading(info);
 	}
+	free(info);
+	ft_unlink();
 	return (0);
 }

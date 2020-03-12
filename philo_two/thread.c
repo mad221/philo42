@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:27:29 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/03/12 14:26:47 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 14:46:00 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,5 @@ int				ft_threading(t_info *info)
 	gettimeofday(&before, NULL);
 	ft_thread(philo, info);
 	ft_is_dead(philo, info);
-	sem_close(speak);
 	return (0);
 }
