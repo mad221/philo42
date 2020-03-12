@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:27:29 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/03/12 13:23:32 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 14:26:47 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				ft_set_value(t_philo *philo, t_info *info, sem_t *s, sem_t *e)
 	philo->philo_total = info->number;
 	philo->time_eat = info->time_eat;
 	philo->time_sleep = info->time_sleep;
-	philo->time_die = info->time_die + 5;
+	philo->time_die = info->time_die + 1;
 	philo->rest_bf_die = ft_get_time();
 	philo->semaphore = s;
 	philo->speak = e;

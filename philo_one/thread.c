@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:17:52 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/03/12 09:54:45 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 14:06:36 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ pthread_mutex_t *mutex)
 	philo->philo_total = info->number;
 	philo->time_eat = info->time_eat;
 	philo->time_sleep = info->time_sleep;
-	philo->time_die = info->time_die + 5;
+	philo->time_die = info->time_die + 1;
 	philo->rest_bf_die = ft_get_time();
 	philo->mutex = mutex;
 	philo->begin = ft_get_time();
@@ -84,7 +84,7 @@ int					ft_threading(t_info *info)
 	{
 		pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 		i++;
-		usleep(35);
+		usleep(50);
 	}
 	ft_is_dead(philo, info);
 	return (0);
