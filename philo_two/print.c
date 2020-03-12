@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:27:10 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/24 15:20:37 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/02/29 11:29:53 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	ft_print(char *str, t_philo *philo)
 {
 	ft_putnbr(ft_get_time() - philo->begin);
 	ft_putstr(" philo ");
-	ft_putnbr(philo->number);
+	ft_putnbr(philo->number + 1);
 	ft_putstr(str);
 }

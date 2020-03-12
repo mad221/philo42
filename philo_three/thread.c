@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:27:29 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/26 15:25:40 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 12:55:58 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,46 @@ void			*ft_live(void *arg)
 	return (NULL);
 }
 
-int				*ft_processing(t_philo *philo, t_info *info, int *pid)
+void			ft_time_eat_bf(t_philo *philo, t_info *info)
 {
 	int i;
 
 	i = 0;
 	sem_wait(philo[i].exit);
+	if (info->eat != -1)
+		while (i < info->number)
+		{
+			sem_wait(philo->sem_eat);
+			i++;
+		}
+}
+
+void			ft_time_eat_af(t_philo *philo, t_info *info)
+{
+	int i;
+
+	i = 0;
+	if (philo->eat != -1)
+	{
+		while (i < info->number)
+		{
+			sem_wait(philo->sem_eat);
+			i++;
+		}
+		sem_wait(philo->speak);
+		sem_post(philo->exit);
+	}
+}
+
+int				*ft_processing(t_philo *philo, t_info *info)
+{
+	int i;
+	int *pid;
+
+	i = 0;
+	if (!(pid = malloc(sizeof(int) * info->number)))
+		return (0);
+	ft_time_eat_bf(philo, info);
 	while (i < info->number)
 	{
 		pid[i] = fork();
@@ -44,29 +78,10 @@ int				*ft_processing(t_philo *philo, t_info *info, int *pid)
 		}
 		i++;
 	}
+	ft_time_eat_af(philo, info);
 	sem_wait(philo[1].exit);
 	ft_kill(pid, info, philo);
 	return (pid);
-}
-
-void			ft_kill(int *pid, t_info *info, t_philo *philo)
-{
-	int i;
-
-	i = 0;
-	while (i < info->number)
-	{
-		kill(pid[i], SIGKILL);
-		i++;
-	}
-	free(philo);
-}
-
-void			ft_close_sem(sem_t *speak, sem_t *semaphore, sem_t *exit)
-{
-	sem_close(speak);
-	sem_close(semaphore);
-	sem_close(exit);
 }
 
 int				ft_process(t_info *info, t_philo *philo)
@@ -74,25 +89,24 @@ int				ft_process(t_info *info, t_philo *philo)
 	sem_t			*se;
 	sem_t			*sp;
 	sem_t			*e;
+	sem_t			*eat;
 	int				i;
-	int				*pid;
 
-	if (!(pid = malloc(sizeof(int) * info->number)))
-		return (0);
 	i = -1;
 	if (!(e = sem_open("exit", O_CREAT, 0644, 1)) ||
-	(!(sp = sem_open("speak", O_CREAT, 0644, 1)) ||
-	(!(se = sem_open("sem", O_CREAT, 0644, info->number)))))
-		return (0);
-	if (!(philo = malloc(sizeof(t_philo) * info->number)))
+	!(sp = sem_open("speak", O_CREAT, 0644, 1)) ||
+	!(se = sem_open("sem", O_CREAT, 0644, info->number)) ||
+	!(eat = sem_open("eat", O_CREAT, 0644, info->number)) ||
+	!(philo = malloc(sizeof(t_philo) * info->number)))
 		return (0);
 	while (++i < info->number)
 	{
 		ft_set_value(&philo[i], info);
 		ft_set_sem(&philo[i], se, sp, e);
+		philo[i].sem_eat = eat;
 		philo[i].number = i;
 	}
-	ft_processing(philo, info, pid);
-	ft_close_sem(sp, se, e);
+	ft_processing(philo, info);
+	ft_close_sem(sp, se, e, eat);
 	return (0);
 }

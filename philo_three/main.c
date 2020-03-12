@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:04:50 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/26 15:24:37 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 11:50:34 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void			ft_unlink(void)
 	sem_unlink("speak");
 	sem_unlink("sem");
 	sem_unlink("exit");
+	sem_unlink("eat");
 }
 
 void			ft_set_sem(t_philo *philo, sem_t *s, sem_t *e, sem_t *q)
@@ -28,12 +29,13 @@ void			ft_set_sem(t_philo *philo, sem_t *s, sem_t *e, sem_t *q)
 
 int				ft_set_value(t_philo *philo, t_info *info)
 {
-	philo->philo_total = info->number;
+	philo->philo_total = info->number + 1;
 	philo->time_eat = info->time_eat;
 	philo->time_sleep = info->time_sleep;
 	philo->time_die = info->time_die + 5;
 	philo->rest_bf_die = ft_get_time();
 	philo->begin = ft_get_time();
+	philo->eat = info->eat;
 	return (0);
 }
 
@@ -51,13 +53,15 @@ int				main(int ac, char **av)
 	t_philo *philo;
 
 	ft_unlink();
-	if (!(info = malloc(sizeof(t_info))))
+	if (!(info = malloc(sizeof(t_info))) ||
+	!(philo = malloc(sizeof(t_philo))))
 		return (0);
-	if (ac == 5)
+	if (ac == 5 || ac == 6)
 	{
-		if (ft_parsing(info, av) == 0)
+		if (ft_parsing(info, av, ac) == 0)
 			return (0);
-		ft_process(info, philo);
+		if (info->number > 1)
+			ft_process(info, philo);
 	}
 	ft_unlink();
 	free(info);

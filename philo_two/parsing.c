@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 15:04:50 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/25 17:18:36 by mpouzol          ###   ########.fr       */
+/*   Created: 2020/02/24 14:26:41 by mpouzol           #+#    #+#             */
+/*   Updated: 2020/03/12 11:08:32 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_unlink(void)
+int	ft_parsing(t_info *info, char **av, int ac)
 {
-	sem_unlink("speak");
-	sem_unlink("sem");
-}
-
-int		main(int ac, char **av)
-{
-	t_info	*info;
-
-	ft_unlink();
-	if (!(info = malloc(sizeof(t_info))))
+	if ((info->number = ft_atoi_base(av[1], "0123456789")) == -1)
 		return (0);
-	if (ac == 5)
+	if ((info->time_die = ft_atoi_base(av[2], "0123456789")) == -1)
+		return (0);
+	if ((info->time_eat = ft_atoi_base(av[3], "0123456789")) == -1)
+		return (0);
+	if ((info->time_sleep = ft_atoi_base(av[4], "0123456789")) == -1)
+		return (0);
+	info->eat = -1;
+	if (ac == 6)
 	{
-		if (ft_parsing(info, av) == 0)
+		if ((info->eat = ft_atoi_base(av[5], "0123456789")) == -1)
 			return (0);
-		ft_threading(info);
 	}
-	return (0);
+	return (1);
 }

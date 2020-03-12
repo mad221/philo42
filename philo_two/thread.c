@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:27:29 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/25 17:21:51 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 11:33:19 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int				ft_set_value(t_philo *philo, t_info *info, sem_t *s, sem_t *e)
 	philo->semaphore = s;
 	philo->speak = e;
 	philo->begin = ft_get_time();
+	philo->eat = info->eat;
 	return (0);
 }
 
@@ -82,7 +83,7 @@ int				ft_threading(t_info *info)
 	}
 	gettimeofday(&before, NULL);
 	ft_thread(philo, info);
-	ft_is_dead(philo, info, before);
+	ft_is_dead(philo, info);
 	sem_close(speak);
 	return (0);
 }

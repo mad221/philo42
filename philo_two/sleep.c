@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 14:27:18 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/25 17:15:32 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 11:40:16 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,32 @@ int			ft_think(t_philo *philo)
 	return (0);
 }
 
-long long	ft_diff_time(struct timeval after, struct timeval before)
+int			ft_all_eat(t_philo *philo, int nbr)
 {
-	return (ft_get_time() - (before.tv_sec * 1000 + before.tv_usec / 1000));
+	int i;
+	int s;
+
+	s = 0;
+	i = 0;
+	while (i < nbr)
+	{
+		if (philo[i].eat == 0)
+			s++;
+		i++;
+	}
+	if (s == nbr)
+	{
+		sem_wait(philo->speak);
+		return (1);
+	}
+	else
+		return (0);
 }
 
-void		ft_is_dead(t_philo *philo, t_info *info, struct timeval before)
+void		ft_is_dead(t_philo *philo, t_info *info)
 {
 	int				i;
 	int				stop;
-	struct timeval	after;
 
 	stop = 0;
 	i = 0;
@@ -47,10 +63,13 @@ void		ft_is_dead(t_philo *philo, t_info *info, struct timeval before)
 	{
 		if (i == info->number)
 			i = 0;
+		if (ft_all_eat(philo, info->number) == 1)
+			return ;
 		if (ft_get_time() - philo[i].rest_bf_die > philo[i].time_die)
 		{
+			sem_wait(philo->speak);
 			ft_print(" is dead \n", philo);
-			stop = 1;
+			return ;
 		}
 		i++;
 	}

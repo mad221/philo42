@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:15:02 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/27 16:40:35 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 11:18:32 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ int			ft_think(t_philo *philo)
 	pthread_mutex_unlock(&philo->mutex[philo->philo_total]);
 	usleep(0);
 	return (0);
-}
-
-long long	ft_diff_time(struct timeval after, struct timeval before)
-{
-	return (ft_get_time() - (before.tv_sec * 1000 + before.tv_usec / 1000));
 }
 
 int			ft_all_eat(t_philo *philo, int nbr)

@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:17:52 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/27 16:26:05 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 09:54:45 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int					ft_threading(t_info *info)
 {
 	t_philo			*philo;
 	pthread_mutex_t *mutex;
-	struct timeval	before;
 	int				i;
 
 	i = 0;

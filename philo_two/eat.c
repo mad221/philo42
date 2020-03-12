@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:11:10 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/25 17:23:54 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 11:25:45 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		ft_eat(t_philo *philo)
 	sem_wait(philo->semaphore);
 	ft_take_fork(philo);
 	philo->rest_bf_die = ft_get_time();
+	if (philo->eat != -1)
+		philo->eat--;
 	sem_wait(philo->speak);
 	ft_print(" is eating\n", philo);
 	sem_post(philo->speak);

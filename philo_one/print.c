@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpouzol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:12:52 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/24 16:14:41 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/02/29 11:30:25 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	ft_print(char *str, t_philo *philo)
 {
 	ft_putnbr(ft_get_time() - philo->begin);
 	ft_putstr(" philo ");
-	ft_putnbr(philo->number);
+	ft_putnbr(philo->number + 1);
 	ft_putstr(str);
 }

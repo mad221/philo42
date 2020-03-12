@@ -1,45 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 14:27:10 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/02/24 15:20:37 by mpouzol          ###   ########.fr       */
+/*   Created: 2020/02/24 15:04:50 by mpouzol           #+#    #+#             */
+/*   Updated: 2020/03/12 11:08:52 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_putstr(char *str)
+void	ft_unlink(void)
 {
-	int i;
+	sem_unlink("speak");
+	sem_unlink("sem");
+}
 
-	i = 0;
-	while (str[i])
+int		main(int ac, char **av)
+{
+	t_info	*info;
+
+	ft_unlink();
+	if (!(info = malloc(sizeof(t_info))))
+		return (0);
+	if (ac == 5 || ac == 6)
 	{
-		write(1, &str[i], 1);
-		i++;
+		if (ft_parsing(info, av, ac) == 0)
+			return (0);
+		ft_threading(info);
 	}
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putnbr(long long nbr)
-{
-	if (nbr > 9)
-		ft_putnbr(nbr / 10);
-	ft_putchar(nbr % 10 + 48);
-}
-
-void	ft_print(char *str, t_philo *philo)
-{
-	ft_putnbr(ft_get_time() - philo->begin);
-	ft_putstr(" philo ");
-	ft_putnbr(philo->number);
-	ft_putstr(str);
+	return (0);
 }
