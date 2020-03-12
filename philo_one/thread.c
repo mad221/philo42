@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:17:52 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/03/12 15:32:56 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 16:00:21 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void				*ft_live(void *arg)
 				ft_think(philo);
 		}
 		else
-			while (1);
+			while (1)
+				;
 	}
 }
 

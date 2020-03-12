@@ -6,7 +6,7 @@
 /*   By: mpouzol <mpouzol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:54:28 by mpouzol           #+#    #+#             */
-/*   Updated: 2020/03/12 15:34:11 by mpouzol          ###   ########.fr       */
+/*   Updated: 2020/03/12 15:54:37 by mpouzol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ int		ft_eat(t_philo *philo)
 		pthread_mutex_unlock(&philo->mutex[philo->number]);
 	}
 	if (philo->eat == 0)
-			return (0);
+		return (0);
 	return (1);
 }
