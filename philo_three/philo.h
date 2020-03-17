@@ -20,6 +20,8 @@
 # include <semaphore.h>
 # include <sys/types.h>
 # include <signal.h>
+# include <fcntl.h>
+# include <sys/stat.h>
 
 typedef struct	s_info
 {
@@ -30,6 +32,7 @@ typedef struct	s_info
 	long long	before;
 	long long	after;
 	int			eat;
+	int			dead;
 }				t_info;
 
 typedef struct	s_philo
@@ -50,7 +53,7 @@ typedef struct	s_philo
 	int			eat;
 }				t_philo;
 
-void			*ft_dead(t_philo *philo);
+void			*ft_dead(t_philo *philo, t_info *info);
 int				ft_think(t_philo *philo);
 int				ft_sleep(t_philo *philo);
 int				ft_eat(t_philo *philo);

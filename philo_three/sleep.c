@@ -46,19 +46,20 @@ int			ft_all_eat(t_philo *philo)
 	return (1);
 }
 
-void		*ft_dead(t_philo *philo)
+void		*ft_dead(t_philo *philo, t_info *info)
 {
 	while (1)
 	{
+		if (ft_all_eat(philo) == 0)
+			return (NULL);
 		if (ft_get_time() - philo->rest_bf_die > philo->time_die)
 		{
 			sem_wait(philo->speak);
 			ft_print(" is dead \n", philo);
+			info->dead = 1;
 			sem_post(philo->exit);
-			exit(1);
-		}
-		if (ft_all_eat(philo) == 0)
 			return (NULL);
+		}
 	}
 	return (NULL);
 }

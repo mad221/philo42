@@ -55,5 +55,7 @@ int		ft_eat(t_philo *philo)
 		philo->eat--;
 	sem_post(philo->semaphore);
 	sem_post(philo->semaphore);
+	if (philo->eat == 0)
+		return (0);
 	return (1);
 }
