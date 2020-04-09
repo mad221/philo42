@@ -12,27 +12,20 @@
 
 #include "philo.h"
 
-void			*ft_live(void *arg)
+void	*ft_live(void *arg)
 {
 	t_philo	*philo;
-	int		stop;
 
-	stop = 1;
-	philo = (t_philo*)arg;
-	while (stop == 1)
+	philo = (t_philo *)arg;
+	while (1)
 	{
-		if (ft_eat(philo) == 1)
-			{
-				if (ft_sleep(philo) == 1)
-				ft_think(philo);
-			}
-		else 
-			return (NULL);	
+		if (ft_eat(philo) == 1 && philo->eat != 0)
+			ft_sleep(philo);
 	}
 	return (NULL);
 }
 
-void			ft_time_eat_bf(t_philo *philo, t_info *info)
+void	ft_time_eat_bf(t_philo *philo, t_info *info)
 {
 	int i;
 
@@ -46,7 +39,7 @@ void			ft_time_eat_bf(t_philo *philo, t_info *info)
 		}
 }
 
-void			ft_time_eat_af(t_philo *philo, t_info *info)
+void	ft_time_eat_af(t_philo *philo, t_info *info)
 {
 	int i;
 
@@ -62,13 +55,10 @@ void			ft_time_eat_af(t_philo *philo, t_info *info)
 		sem_post(philo->exit);
 	}
 	if (info->dead == 1)
-	{
 		sem_post(philo->exit);
-	}
-
 }
 
-int				*ft_processing(t_philo *philo, t_info *info)
+int		*ft_processing(t_philo *philo, t_info *info)
 {
 	int i;
 	int *pid;
@@ -83,7 +73,6 @@ int				*ft_processing(t_philo *philo, t_info *info)
 		if (pid[i] == 0)
 		{
 			philo[i].rest_bf_die = ft_get_time();
-			philo[i].begin = ft_get_time();
 			pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 			ft_dead(&philo[i], info);
 		}
@@ -95,20 +84,20 @@ int				*ft_processing(t_philo *philo, t_info *info)
 	return (pid);
 }
 
-int				ft_process(t_info *info, t_philo *philo)
+int		ft_process(t_info *info, t_philo *philo)
 {
-	sem_t			*se;
-	sem_t			*sp;
-	sem_t			*e;
-	sem_t			*eat;
-	int				i;
+	sem_t	*se;
+	sem_t	*sp;
+	sem_t	*e;
+	sem_t	*eat;
+	int		i;
 
 	i = -1;
 	if (!(e = sem_open("exit", O_CREAT, 0644, 1)) ||
-	!(sp = sem_open("speak", O_CREAT, 0644, 1)) ||
-	!(se = sem_open("sem", O_CREAT, 0644, info->number)) ||
-	!(eat = sem_open("eat", O_CREAT, 0644, info->number)) ||
-	!(philo = malloc(sizeof(t_philo) * info->number)))
+		!(sp = sem_open("speak", O_CREAT, 0644, 1)) ||
+		!(se = sem_open("sem", O_CREAT, 0644, info->number)) ||
+		!(eat = sem_open("eat", O_CREAT, 0644, info->number)) ||
+		!(philo = malloc(sizeof(t_philo) * info->number)))
 		return (0);
 	while (++i < info->number)
 	{
@@ -116,6 +105,7 @@ int				ft_process(t_info *info, t_philo *philo)
 		ft_set_sem(&philo[i], se, sp, e);
 		philo[i].sem_eat = eat;
 		philo[i].number = i;
+		philo[i].begin = ft_get_time();
 	}
 	ft_processing(philo, info);
 	ft_close_sem(sp, se, e, eat);

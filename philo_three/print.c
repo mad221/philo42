@@ -12,16 +12,14 @@
 
 #include "philo.h"
 
-void	ft_putstr(char *str)
+int		ft_strlen(char *str)
 {
 	int i;
 
 	i = 0;
 	while (str[i])
-	{
-		write(1, &str[i], 1);
 		i++;
-	}
+	return (i);
 }
 
 void	ft_putchar(char c)
@@ -38,8 +36,10 @@ void	ft_putnbr(long long nbr)
 
 void	ft_print(char *str, t_philo *philo)
 {
+	sem_wait(philo->speak);
 	ft_putnbr(ft_get_time() - philo->begin);
-	ft_putstr(" philo ");
+	write(1, " philo ", 7);
 	ft_putnbr(philo->number + 1);
-	ft_putstr(str);
+	write(1, str, ft_strlen(str));
+	sem_post(philo->speak);
 }

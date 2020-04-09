@@ -16,22 +16,11 @@ int			ft_sleep(t_philo *philo)
 {
 	if (philo->eat != 0)
 	{
-		sem_wait(philo->speak);
 		ft_print(" is sleeping \n", philo);
-		sem_post(philo->speak);
 		usleep(philo->time_sleep * 1000);
+		ft_print(" is thinking \n", philo);
 		return (1);
 	}
-	usleep(philo->time_sleep * 1000);
-	return (0);
-}
-
-int			ft_think(t_philo *philo)
-{
-	sem_wait(philo->speak);
-	ft_print(" is thinking \n", philo);
-	sem_post(philo->speak);
-	usleep(0);
 	return (0);
 }
 
@@ -54,8 +43,8 @@ void		*ft_dead(t_philo *philo, t_info *info)
 			return (NULL);
 		if (ft_get_time() - philo->rest_bf_die > philo->time_die)
 		{
-			sem_wait(philo->speak);
 			ft_print(" is dead \n", philo);
+			sem_wait(philo->speak);
 			info->dead = 1;
 			sem_post(philo->exit);
 			return (NULL);

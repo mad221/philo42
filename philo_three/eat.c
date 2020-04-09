@@ -33,23 +33,14 @@ void	ft_close_sem(sem_t *sp, sem_t *sem, sem_t *exit, sem_t *eat)
 	sem_close(eat);
 }
 
-void	ft_take_fork(t_philo *philo)
-{
-	sem_wait(philo->speak);
-	ft_print(" has taken a fork\n", philo);
-	sem_post(philo->speak);
-}
-
 int		ft_eat(t_philo *philo)
 {
 	sem_wait(philo->semaphore);
-	ft_take_fork(philo);
+	ft_print(" has taken a fork\n", philo);
 	sem_wait(philo->semaphore);
-	ft_take_fork(philo);
+	ft_print(" has taken a fork\n", philo);
 	philo->rest_bf_die = ft_get_time();
-	sem_wait(philo->speak);
 	ft_print(" is eating\n", philo);
-	sem_post(philo->speak);
 	usleep(philo->time_eat * 1000);
 	if (philo->eat != -1)
 		philo->eat--;
