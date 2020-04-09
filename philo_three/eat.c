@@ -19,7 +19,7 @@ void	ft_kill(int *pid, t_info *info, t_philo *philo)
 	i = 0;
 	while (i < info->number)
 	{
-		kill(pid[i], SIGKILL);
+		kill(pid[1], SIGKILL);
 		i++;
 	}
 	free(philo);
@@ -43,10 +43,10 @@ int		ft_eat(t_philo *philo)
 	ft_print(" is eating\n", philo);
 	usleep(philo->time_eat * 1000);
 	if (philo->eat != -1)
-		philo->eat--;
-	sem_post(philo->semaphore);
-	sem_post(philo->semaphore);
+	 	philo->eat--;
 	if (philo->eat == 0)
-		return (0);
+		sem_post(philo->sem_eat);
+	sem_post(philo->semaphore);
+	sem_post(philo->semaphore);
 	return (1);
 }

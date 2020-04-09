@@ -19,8 +19,9 @@ void	*ft_live(void *arg)
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		if (ft_eat(philo) == 1 && philo->eat != 0)
-			ft_sleep(philo);
+		if (philo->eat != 0)
+			if (ft_eat(philo) == 1 && philo->eat != 0)
+				ft_sleep(philo);
 	}
 	return (NULL);
 }
@@ -43,14 +44,11 @@ void	ft_time_eat_af(t_philo *philo, t_info *info)
 {
 	int i;
 
-	i = 0;
+	i = -1;
 	if (philo->eat != -1 && info->dead != 1)
 	{
-		while (i < info->number)
-		{
+		while (++i < info->number)
 			sem_wait(philo->sem_eat);
-			i++;
-		}
 		sem_wait(philo->speak);
 		sem_post(philo->exit);
 	}
