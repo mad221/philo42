@@ -42,11 +42,11 @@ int		ft_eat(t_philo *philo)
 	philo->rest_bf_die = ft_get_time();
 	ft_print(" is eating\n", philo);
 	usleep(philo->time_eat * 1000);
+	sem_post(philo->semaphore);
+	sem_post(philo->semaphore);
 	if (philo->eat != -1)
-	 	philo->eat--;
+		philo->eat--;
 	if (philo->eat == 0)
 		sem_post(philo->sem_eat);
-	sem_post(philo->semaphore);
-	sem_post(philo->semaphore);
 	return (1);
 }

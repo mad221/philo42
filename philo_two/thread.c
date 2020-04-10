@@ -25,8 +25,8 @@ int				ft_set_value(t_philo *philo, t_info *info, sem_t *s, sem_t *e)
 	philo->philo_total = info->number;
 	philo->time_eat = info->time_eat;
 	philo->time_sleep = info->time_sleep;
-	philo->time_die = info->time_die + 1;
-	philo->rest_bf_die = ft_get_time();
+	philo->time_die = info->time_die;
+	philo->rest_bf_die = ft_get_time() + 5;
 	philo->semaphore = s;
 	philo->speak = e;
 	philo->begin = ft_get_time();
@@ -41,9 +41,10 @@ void			*ft_live(void *arg)
 	philo = (t_philo*)arg;
 	while (1)
 	{
-		if (ft_eat(philo) == 1)
-			if (ft_sleep(philo) == 1)
-				ft_think(philo);
+		if (philo->eat != 0)
+			if (ft_eat(philo) == 1 && philo->eat != 0)
+				if (ft_sleep(philo) == 1)
+					ft_think(philo);
 	}
 }
 
@@ -56,7 +57,7 @@ void			ft_thread(t_philo *philo, t_info *info)
 	{
 		pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 		i++;
-		usleep(50);
+		usleep(150);
 	}
 }
 
