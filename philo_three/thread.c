@@ -68,6 +68,8 @@ int		*ft_processing(t_philo *philo, t_info *info)
 	while (i < info->number)
 	{
 		pid[i] = fork();
+		philo[i].begin = ft_get_time();
+		philo[i].rest_bf_die = ft_get_time();
 		if (pid[i] == 0)
 		{
 			pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
@@ -102,8 +104,6 @@ int		ft_process(t_info *info, t_philo *philo)
 		ft_set_sem(&philo[i], se, sp, e);
 		philo[i].sem_eat = eat;
 		philo[i].number = i;
-		philo[i].begin = ft_get_time();
-		philo[i].rest_bf_die = ft_get_time();
 	}
 	ft_processing(philo, info);
 	ft_close_sem(sp, se, e, eat);
