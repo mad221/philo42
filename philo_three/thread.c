@@ -70,10 +70,13 @@ int		*ft_processing(t_philo *philo, t_info *info)
 		pid[i] = fork();
 		if (pid[i] == 0)
 		{
+			philo[i].begin = ft_get_time();
+			philo[i].rest_bf_die = ft_get_time();
 			pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
-			usleep(50);
 			ft_dead(&philo[i], info);
 		}
+		else
+			usleep(175);
 		i++;
 	}
 	ft_time_eat_af(philo, info);
@@ -103,8 +106,6 @@ int		ft_process(t_info *info, t_philo *philo)
 		ft_set_sem(&philo[i], se, sp, e);
 		philo[i].sem_eat = eat;
 		philo[i].number = i;
-		philo[i].begin = ft_get_time();
-		philo[i].rest_bf_die = ft_get_time();
 	}
 	ft_processing(philo, info);
 	ft_close_sem(sp, se, e, eat);
