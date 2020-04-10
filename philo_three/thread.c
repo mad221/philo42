@@ -70,12 +70,12 @@ int		*ft_processing(t_philo *philo, t_info *info)
 		pid[i] = fork();
 		if (pid[i] == 0)
 		{
-			philo[i].begin = ft_get_time() + 5;
+			philo[i].begin = ft_get_time();
 			philo[i].rest_bf_die = ft_get_time();
 			pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 			ft_dead(&philo[i], info);
 		}
-		usleep(150);
+		usleep(250);
 		i++;
 	}
 	ft_time_eat_af(philo, info);
