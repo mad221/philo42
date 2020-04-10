@@ -71,7 +71,7 @@ int		*ft_processing(t_philo *philo, t_info *info)
 		if (pid[i] == 0)
 		{
 			philo[i].begin = ft_get_time();
-			philo[i].rest_bf_die = ft_get_time();
+			philo[i].rest_bf_die = ft_get_time() + 5;
 			pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 			ft_dead(&philo[i], info);
 		}
