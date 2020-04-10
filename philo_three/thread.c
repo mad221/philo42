@@ -18,6 +18,8 @@ void	*ft_live(void *arg)
 
 
 	philo = (t_philo *)arg;
+	philo->begin = ft_get_time() + 5;
+	philo->rest_bf_die = ft_get_time() + 5;
 	while (1)
 	{
 		if (philo->eat != 0)
@@ -71,8 +73,6 @@ int		*ft_processing(t_philo *philo, t_info *info)
 		pid[i] = fork();
 		if (pid[i] == 0)
 		{
-			philo[i].begin = ft_get_time();
-			philo[i].rest_bf_die = ft_get_time();
 			pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 			usleep(20);
 			ft_dead(&philo[i], info);
