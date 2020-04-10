@@ -27,7 +27,7 @@ void		*ft_dead(t_philo *philo, t_info *info)
 	while (1)
 	{
 		if (philo->eat != 0)
-			if (ft_get_time() - philo->rest_bf_die > philo->time_die)
+			if (ft_get_time() - philo->rest_bf_die > philo->time_die + 5)
 			{
 				ft_print(" is dead \n", philo);
 				sem_wait(philo->speak);
