@@ -75,7 +75,7 @@ int		*ft_processing(t_philo *philo, t_info *info)
 			pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 			ft_dead(&philo[i], info);
 		}
-		usleep(100);
+		usleep(50);
 		i++;
 	}
 	ft_time_eat_af(philo, info);
