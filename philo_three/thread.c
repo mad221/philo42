@@ -104,6 +104,7 @@ int		ft_process(t_info *info, t_philo *philo)
 		ft_set_sem(&philo[i], se, sp, e);
 		philo[i].sem_eat = eat;
 		philo[i].number = i;
+		philo[i].is_dead = 0;
 	}
 	ft_processing(philo, info);
 	ft_close_sem(sp, se, e, eat);

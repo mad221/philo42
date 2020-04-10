@@ -51,6 +51,7 @@ typedef struct	s_philo
 	pthread_t	thread;
 	int			pid;
 	int			eat;
+	int			is_dead;
 }				t_philo;
 
 void			*ft_dead(t_philo *philo, t_info *info);

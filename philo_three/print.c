@@ -44,5 +44,6 @@ void	ft_print(char *str, t_philo *philo)
 	write(1, " philo ", 7);
 	ft_putnbr(philo->number + 1);
 	write(1, str, ft_strlen(str));
+	if (philo->is_dead != 1)
 	sem_post(philo->speak);
 }

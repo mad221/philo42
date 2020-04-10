@@ -30,7 +30,7 @@ void	*ft_dead(t_philo *philo, t_info *info)
 			if (ft_get_time() - philo->rest_bf_die > philo->time_die + 9)
 			{
 				ft_print(" is dead \n", philo);
-				sem_wait(philo->speak);
+				philo->is_dead = 1;
 				info->dead = 1;
 				sem_post(philo->exit);
 				return (NULL);
