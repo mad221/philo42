@@ -37,10 +37,7 @@ void	ft_putnbr(long long nbr)
 void	ft_print(char *str, t_philo *philo)
 {
 	sem_wait(philo->speak);
-	if (ft_get_time() - philo->begin - 5 < 0)
-		write(1, "0", 1);
-	else 
-		ft_putnbr(ft_get_time() - philo->begin);
+	ft_putnbr(ft_get_time() - philo->begin);
 	write(1, " philo ", 7);
 	ft_putnbr(philo->number + 1);
 	write(1, str, ft_strlen(str));

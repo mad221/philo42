@@ -23,7 +23,12 @@ void	*ft_live(void *arg)
 	{
 		if (philo->eat != 0)
 			if (ft_eat(philo) == 1 && philo->eat != 0)
-				ft_sleep(philo);
+			{
+				ft_print(" is sleeping \n", philo);
+				usleep(philo->time_sleep * 1000);
+				if (philo->eat != 0)
+					ft_print(" is thinking \n", philo);
+			}
 	}
 	return (NULL);
 }
