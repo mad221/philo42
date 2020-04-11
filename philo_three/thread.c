@@ -78,6 +78,7 @@ int		ft_processing(t_philo *philo, t_info *info)
 		{
 			pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 			pthread_detach(philo[i].thread);
+			usleep(30);
 			ft_dead(&philo[i], info);
 			return (0);
 		}
