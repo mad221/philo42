@@ -27,7 +27,7 @@ void	*ft_live(void *arg)
 				usleep(philo->time_sleep * 1000);
 				if (philo->eat != 0)
 					ft_print(" is thinking \n", philo);
-				usleep(10);
+				usleep(5);
 			}
 		}
 	}
