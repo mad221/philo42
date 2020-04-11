@@ -17,6 +17,8 @@ void	*ft_live(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	philo->begin = ft_get_time();
+	philo->rest_bf_die = ft_get_time();
 	while (1)
 	{
 		if (philo->eat != 0)
@@ -111,8 +113,6 @@ int		ft_process(t_info *info, t_philo *philo)
 		philo[i].sem_eat = eat;
 		philo[i].number = i;
 		philo[i].is_dead = 0;
-		philo[i].begin = ft_get_time();
-		philo[i].rest_bf_die = ft_get_time();
 	}
 	if (ft_processing(philo, info))
 		return (0);
