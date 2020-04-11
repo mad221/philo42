@@ -29,7 +29,6 @@ int				ft_set_value(t_philo *philo, t_info *info, sem_t *s, sem_t *e)
 	philo->rest_bf_die = ft_get_time() + 5;
 	philo->semaphore = s;
 	philo->speak = e;
-	philo->begin = ft_get_time();
 	philo->eat = info->eat;
 	return (0);
 }
