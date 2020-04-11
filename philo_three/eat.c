@@ -42,7 +42,7 @@ int		ft_eat(t_philo *philo)
 	philo->rest_bf_die = ft_get_time();
 	ft_print(" is eating\n", philo);
 	printf("je suis avant\n");
-	usleep(philo->time_eat * 1000 - 10);
+	usleep(philo->time_eat * 1000 - 100);
 	printf("je suis apres\n");
 	sem_post(philo->semaphore);
 	sem_post(philo->semaphore);
