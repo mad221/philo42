@@ -39,7 +39,7 @@ int		ft_eat(t_philo *philo)
 	ft_print(" has taken a fork\n", philo);
 	sem_wait(philo->semaphore);
 	ft_print(" has taken a fork\n", philo);
-	philo->rest_bf_die = ft_get_time();
+	philo->rest_bf_die = ft_get_time() + 5;
 	ft_print(" is eating\n", philo);
 	usleep(philo->time_eat * 1000);
 	sem_post(philo->semaphore);

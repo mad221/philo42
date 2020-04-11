@@ -18,7 +18,7 @@ void	*ft_live(void *arg)
 
 	philo = (t_philo *)arg;
 	philo->begin = ft_get_time();
-	philo->rest_bf_die = ft_get_time();
+	philo->rest_bf_die = ft_get_time() + 5;
 	while (1)
 	{
 		if (philo->eat != 0)
