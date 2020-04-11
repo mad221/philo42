@@ -44,7 +44,7 @@ int		ft_eat(t_philo *philo)
 	usleep(philo->time_eat * 1000);
 	sem_post(philo->semaphore);
 	sem_post(philo->semaphore);
-	printf("fork poseeeeeeeeeee\n");
+	ft_print(" has posed fork\n", philo);
 	if (philo->eat != -1)
 		philo->eat--;
 	if (philo->eat == 0)
