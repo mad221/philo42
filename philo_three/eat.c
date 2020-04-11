@@ -36,14 +36,12 @@ void	ft_close_sem(sem_t *sp, sem_t *sem, sem_t *exit, sem_t *eat)
 int		ft_eat(t_philo *philo)
 {
 	sem_wait(philo->semaphore);
-	ft_print(" has taken a fork\n", philo);
 	sem_wait(philo->semaphore);
+	ft_print(" has taken a fork\n", philo);
 	ft_print(" has taken a fork\n", philo);
 	philo->rest_bf_die = ft_get_time();
 	ft_print(" is eating\n", philo);
-	printf("je suis avant\n");
-	usleep(philo->time_eat * 1000 - 100);
-	printf("je suis apres\n");
+	usleep(philo->time_eat * 1000);
 	sem_post(philo->semaphore);
 	sem_post(philo->semaphore);
 	ft_print(" has posed forkssssssssssss\n", philo);

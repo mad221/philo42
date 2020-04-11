@@ -24,9 +24,7 @@ int	ft_parsing(t_info *info, char **av, int ac)
 		return (0);
 	info->eat = -1;
 	if (ac == 6)
-	{
 		if ((info->eat = ft_atoi_base(av[5], "0123456789")) == -1)
 			return (0);
-	}
 	return (1);
 }

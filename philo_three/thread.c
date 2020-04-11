@@ -17,6 +17,8 @@ void	*ft_live(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	philo->begin = ft_get_time();
+	philo->rest_bf_die = ft_get_time();
 	while (1)
 	{
 		if (philo->eat != 0)
@@ -92,8 +94,6 @@ int		ft_processing(t_philo *philo, t_info *info)
 			{
 				sem_post(philo[s].speak);
 				sem_post(philo[s].speak);
-				philo[i].begin = ft_get_time();
-				philo[i].rest_bf_die = ft_get_time();
 				s++;
 			}
 		}
