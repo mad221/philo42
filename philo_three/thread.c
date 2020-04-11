@@ -18,7 +18,6 @@ void	*ft_live(void *arg)
 
 	philo = (t_philo *)arg;
 	philo->begin = ft_get_time();
-	philo->rest_bf_die = ft_get_time() + 5;
 	while (1)
 	{
 		if (philo->eat != 0)
@@ -29,7 +28,6 @@ void	*ft_live(void *arg)
 				usleep(philo->time_sleep * 1000);
 				if (philo->eat != 0)
 					ft_print(" is thinking \n", philo);
-				usleep(5);
 			}
 		}
 	}
