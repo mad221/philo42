@@ -14,13 +14,19 @@
 
 void	*ft_dead(t_philo *philo, t_info *info)
 {
+	int	i;
+
+	i = -1;
 	while (1)
 	{
 		if (philo->eat != 0)
 			if (ft_get_time() - philo->rest_bf_die > philo->time_die)
 			{
-				ft_print(" is dead \n", philo);
 				philo->is_dead = 1;
+				ft_print(" is dead \n", philo);
+				if (philo->eat != -1)
+				while (++i < philo->philo_total)
+					sem_post(philo->sem_eat);
 				info->dead = 1;
 				sem_post(philo->exit);
 				return (NULL);

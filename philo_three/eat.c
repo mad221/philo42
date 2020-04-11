@@ -19,7 +19,7 @@ void	ft_kill(int *pid, t_info *info, t_philo *philo)
 	i = 0;
 	while (i < info->number)
 	{
-		kill(pid[1], SIGKILL);
+		kill(pid[i], SIGKILL);
 		i++;
 	}
 	free(philo);
