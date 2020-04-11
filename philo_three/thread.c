@@ -74,15 +74,29 @@ int		ft_processing(t_philo *philo, t_info *info)
 	ft_time_eat_bf(philo, info);
 	while (i < info->number)
 	{
-		if ((pid[i] = fork()) == 0)
+		pid[i] = fork();
+		if (pid[i] == 0)
 		{
+			sem_wait(philo[i].speak);
+			sem_wait(philo[i].speak);
 			pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 			pthread_detach(philo[i].thread);
 			usleep(30);
 			ft_dead(&philo[i], info);
 			return (0);
 		}
-		i++;
+				i++;
+		if (i == info->number)
+		{	int s;
+			s = 0;
+			while (s < info->number)
+			{
+				sem_post(philo[s].speak);
+				sem_post(philo[s].speak);
+				s++;
+			}
+		}
+		
 	};
 	ft_time_eat_af(philo, info);
 	sem_wait(philo->exit);
