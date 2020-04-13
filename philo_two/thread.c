@@ -57,7 +57,7 @@ void			ft_thread(t_philo *philo, t_info *info)
 	{
 		pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 		i++;
-		usleep(150);
+		usleep(50);
 	}
 }
 

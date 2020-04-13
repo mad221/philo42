@@ -26,7 +26,6 @@ int			ft_think(t_philo *philo)
 	sem_wait(philo->speak);
 	ft_print(" is thinking \n", philo);
 	sem_post(philo->speak);
-	usleep(0);
 	return (0);
 }
 
@@ -66,7 +65,7 @@ void		ft_is_dead(t_philo *philo, t_info *info)
 			i = 0;
 		if (ft_all_eat(philo, info->number) == 1)
 			return ;
-		if (ft_get_time() - philo[i].rest_bf_die > philo[i].time_die)
+		if (ft_get_time() - philo[i].rest_bf_die > philo[i].time_die + 5)
 		{
 			sem_wait(philo->speak);
 			ft_print(" is dead \n", philo);

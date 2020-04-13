@@ -22,17 +22,17 @@ void	ft_take_fork(t_philo *philo)
 int		ft_eat(t_philo *philo)
 {
 	sem_wait(philo->semaphore);
-	ft_take_fork(philo);
 	sem_wait(philo->semaphore);
 	ft_take_fork(philo);
+	ft_take_fork(philo);
 	philo->rest_bf_die = ft_get_time();
-	if (philo->eat != -1)
-		philo->eat--;
 	sem_wait(philo->speak);
 	ft_print(" is eating\n", philo);
 	sem_post(philo->speak);
 	usleep(philo->time_eat * 1000);
 	sem_post(philo->semaphore);
 	sem_post(philo->semaphore);
+	if (philo->eat != -1)
+		philo->eat--;
 	return (1);
 }
