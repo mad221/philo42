@@ -81,7 +81,7 @@ int		ft_processing(t_philo *philo, t_info *info)
 			sem_wait(philo[i].speak);
 			pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 			pthread_detach(philo[i].thread);
-			usleep(30);
+			usleep(5);
 			ft_dead(&philo[i], info);
 			return (0);
 		}
@@ -126,6 +126,7 @@ int		ft_process(t_info *info, t_philo *philo)
 		philo[i].sem_eat = eat;
 		philo[i].number = i;
 		philo[i].is_dead = 0;
+		philo[i].begin = ft_get_time();
 	}
 	if (ft_processing(philo, info))
 		return (0);
