@@ -68,11 +68,11 @@ int		ft_processing(t_philo *philo, t_info *info)
 	int i;
 	int *pid;
 
-	i = -1;
+	i = 0;
 	if (!(pid = malloc(sizeof(int) * info->number)))
 		return (0);
 	ft_time_eat_bf(philo, info);
-	while (++i < info->number)
+	while (i < info->number)
 	{
 		pid[i] = fork();
 		if (pid[i] == 0)
@@ -84,7 +84,7 @@ int		ft_processing(t_philo *philo, t_info *info)
 			ft_dead(&philo[i], info);
 			return (0);
 		}
-		ft_get_started(info, philo, i);
+		ft_get_started(info, philo, ++i);
 	}
 	ft_time_eat_af(philo, info);
 	sem_wait(philo->exit);
