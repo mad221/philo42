@@ -68,11 +68,11 @@ int		ft_processing(t_philo *philo, t_info *info)
 	int i;
 	int *pid;
 
-	i = 0;
+	i = -1;
 	if (!(pid = malloc(sizeof(int) * info->number)))
 		return (0);
 	ft_time_eat_bf(philo, info);
-	while (i < info->number)
+	while (++i < info->number)
 	{
 		pid[i] = fork();
 		if (pid[i] == 0)
@@ -81,23 +81,11 @@ int		ft_processing(t_philo *philo, t_info *info)
 			sem_wait(philo[i].speak);
 			pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 			pthread_detach(philo[i].thread);
-			usleep(5);
 			ft_dead(&philo[i], info);
 			return (0);
 		}
-				i++;
-		if (i == info->number)
-		{	int s;
-			s = 0;
-			while (s < info->number)
-			{
-				sem_post(philo[s].speak);
-				sem_post(philo[s].speak);
-				s++;
-			}
-		}
-		
-	};
+		ft_get_started(info, philo, i);
+	}
 	ft_time_eat_af(philo, info);
 	sem_wait(philo->exit);
 	ft_kill(pid, info, philo);
@@ -125,7 +113,6 @@ int		ft_process(t_info *info, t_philo *philo)
 		ft_set_sem(&philo[i], se, sp, e);
 		philo[i].sem_eat = eat;
 		philo[i].number = i;
-		philo[i].is_dead = 0;
 		philo[i].begin = ft_get_time();
 	}
 	if (ft_processing(philo, info))

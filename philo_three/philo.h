@@ -54,6 +54,7 @@ typedef struct	s_philo
 	int			is_dead;
 }				t_philo;
 
+void			ft_get_started(t_info *info, t_philo *philo, int i);
 void			*ft_dead(t_philo *philo, t_info *info);
 int				ft_think(t_philo *philo);
 int				ft_sleep(t_philo *philo);

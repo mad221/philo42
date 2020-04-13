@@ -37,6 +37,7 @@ int				ft_set_value(t_philo *philo, t_info *info)
 	philo->begin = ft_get_time();
 	philo->eat = info->eat;
 	info->dead = 0;
+	philo->is_dead = 0;
 	return (0);
 }
 
