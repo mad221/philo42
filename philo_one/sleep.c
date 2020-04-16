@@ -59,6 +59,7 @@ void		ft_is_dead(t_philo *philo, t_info *info)
 
 	stop = 0;
 	i = 0;
+	ft_lets_go(philo, info);
 	while (stop != 1)
 	{
 		if (i == info->number)

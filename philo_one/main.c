@@ -12,7 +12,34 @@
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+void	ft_start_init(t_philo *philo, t_info *info)
+{
+	int				i;
+	pthread_mutex_t	start;
+
+	i = 0;
+	pthread_mutex_init(&start, NULL);
+	while (i < info->number)
+	{
+		philo[i].start = start;
+		i++;
+	}
+}
+
+void	ft_lets_go(t_philo *philo, t_info *info)
+{
+	int i;
+
+	i = 0;
+	while (i > info->number)
+	{
+		pthread_mutex_unlock(&philo[i].start);
+		usleep(1);
+		i++;
+	}
+}
+
+int		main(int ac, char **av)
 {
 	t_info *info;
 

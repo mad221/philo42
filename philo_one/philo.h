@@ -42,9 +42,12 @@ typedef struct		s_philo
 	int				philo_total;
 	long long		begin;
 	pthread_mutex_t	*mutex;
+	pthread_mutex_t start;
 	pthread_t		thread;
 }					t_philo;
 
+void				ft_lets_go(t_philo *philo, t_info *info);
+void				ft_start_init(t_philo *philo, t_info *info);
 void				ft_is_dead(t_philo *philo, t_info *i);
 int					ft_think(t_philo *philo);
 int					ft_sleep(t_philo *philo);

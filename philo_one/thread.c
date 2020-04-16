@@ -56,6 +56,7 @@ void				*ft_live(void *arg)
 	t_philo *philo;
 
 	philo = (t_philo*)arg;
+	pthread_mutex_lock(&philo->start);
 	while (1)
 	{
 		if (ft_eat(philo) == 1)
@@ -84,6 +85,7 @@ int					ft_threading(t_info *info)
 		i++;
 	}
 	i = 0;
+	ft_start_init(philo, info);
 	while (i < info->number)
 	{
 		pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
