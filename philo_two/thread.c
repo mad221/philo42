@@ -99,9 +99,6 @@ int				ft_threading(t_info *info)
 	}
 	ft_thread(philo, info);
 	ft_is_dead(philo, info);
-	sem_close(speak);
-	sem_close(semaphore);
-	sem_close(philo->start);
 	free(philo);
 	return (0);
 }
