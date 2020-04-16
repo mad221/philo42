@@ -14,19 +14,10 @@
 
 int			ft_sleep(t_philo *philo)
 {
-	sem_wait(philo->speak);
 	ft_print(" is sleeping \n", philo);
-	sem_post(philo->speak);
 	usleep(philo->time_sleep * 1000);
-	return (1);
-}
-
-int			ft_think(t_philo *philo)
-{
-	sem_wait(philo->speak);
 	ft_print(" is thinking \n", philo);
-	sem_post(philo->speak);
-	return (0);
+	return (1);
 }
 
 int			ft_all_eat(t_philo *philo, int nbr)
@@ -45,7 +36,6 @@ int			ft_all_eat(t_philo *philo, int nbr)
 	if (s == nbr)
 	{
 		sem_wait(philo->speak);
-		free(philo);
 		return (1);
 	}
 	else
@@ -65,11 +55,11 @@ void		ft_is_dead(t_philo *philo, t_info *info)
 			i = 0;
 		if (ft_all_eat(philo, info->number) == 1)
 			return ;
-		if (ft_get_time() - philo[i].rest_bf_die > philo[i].time_die + 5)
+		if (ft_get_time() - philo[i].rest_bf_die > philo[i].time_die + 5
+		&& philo[i].eat != 0)
 		{
-			sem_wait(philo->speak);
-			ft_print(" is dead \n", philo);
-			free(philo);
+			philo[i].is_dead = 1;
+			ft_print(" is dead \n", &philo[i]);
 			return ;
 		}
 		i++;

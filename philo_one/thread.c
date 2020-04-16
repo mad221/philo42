@@ -64,8 +64,7 @@ void				*ft_live(void *arg)
 				ft_think(philo);
 		}
 		else
-			while (1)
-				;
+			return (NULL);
 	}
 }
 
@@ -89,7 +88,6 @@ int					ft_threading(t_info *info)
 	{
 		pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
 		i++;
-		usleep(50);
 	}
 	ft_is_dead(philo, info);
 	free(philo);

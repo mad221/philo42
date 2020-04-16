@@ -48,6 +48,7 @@ typedef struct	s_philo
 	sem_t		*speak;
 	sem_t		*exit;
 	sem_t		*sem_eat;
+	sem_t		*start;
 	pthread_t	thread;
 	int			pid;
 	int			eat;
@@ -66,7 +67,7 @@ long long		ft_get_time(void);
 void			ft_print(char *str, t_philo *philo);
 void			ft_thread(t_philo *philo, t_info *info);
 void			ft_unlink(void);
-int				ft_set_value(t_philo *philo, t_info *info);
+int				ft_set_value(t_philo *philo, t_info *info, int i);
 void			ft_set_sem(t_philo *philo, sem_t *s, sem_t *e, sem_t *q);
 void			ft_kill(int *pid, t_info *info, t_philo *philo);
 void			ft_close_sem(sem_t *sp, sem_t *sem, sem_t *exit, sem_t *eat);

@@ -27,14 +27,14 @@ void			ft_set_sem(t_philo *philo, sem_t *s, sem_t *e, sem_t *q)
 	philo->exit = q;
 }
 
-int				ft_set_value(t_philo *philo, t_info *info)
+int				ft_set_value(t_philo *philo, t_info *info, int i)
 {
+	philo[i].number = i;
 	philo->philo_total = info->number + 1;
 	philo->time_eat = info->time_eat;
 	philo->time_sleep = info->time_sleep;
 	philo->time_die = info->time_die + 1;
 	philo->rest_bf_die = ft_get_time();
-	philo->begin = ft_get_time();
 	philo->eat = info->eat;
 	info->dead = 0;
 	philo->is_dead = 0;

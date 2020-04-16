@@ -65,10 +65,11 @@ void		ft_is_dead(t_philo *philo, t_info *info)
 			i = 0;
 		if (ft_all_eat(philo, info->number) == 1)
 			return ;
-		if (ft_get_time() - philo[i].rest_bf_die > philo[i].time_die)
+		if (ft_get_time() - philo[i].rest_bf_die > philo[i].time_die + 5
+		&& philo[i].eat != 0)
 		{
 			pthread_mutex_lock(&philo->mutex[philo->philo_total]);
-			ft_print(" is died \n", philo);
+			ft_print(" is died \n", &philo[i]);
 			return ;
 		}
 		i++;

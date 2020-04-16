@@ -16,6 +16,7 @@ void	ft_unlink(void)
 {
 	sem_unlink("speak");
 	sem_unlink("sem");
+	sem_unlink("start");
 }
 
 int		main(int ac, char **av)

@@ -12,27 +12,20 @@
 
 #include "philo.h"
 
-void	ft_take_fork(t_philo *philo)
-{
-	sem_wait(philo->speak);
-	ft_print(" has taken a fork\n", philo);
-	sem_post(philo->speak);
-}
-
 int		ft_eat(t_philo *philo)
 {
 	sem_wait(philo->semaphore);
 	sem_wait(philo->semaphore);
-	ft_take_fork(philo);
-	ft_take_fork(philo);
+	ft_print(" has taken a fork\n", philo);
+	ft_print(" has taken a fork\n", philo);
 	philo->rest_bf_die = ft_get_time();
-	sem_wait(philo->speak);
 	ft_print(" is eating\n", philo);
-	sem_post(philo->speak);
 	usleep(philo->time_eat * 1000);
 	sem_post(philo->semaphore);
 	sem_post(philo->semaphore);
 	if (philo->eat != -1)
 		philo->eat--;
+	if (philo->eat == 0)
+		return (0);
 	return (1);
 }

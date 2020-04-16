@@ -25,9 +25,7 @@ int				ft_set_value(t_philo *philo, t_info *info, sem_t *s, sem_t *e)
 	philo->philo_total = info->number;
 	philo->time_eat = info->time_eat;
 	philo->time_sleep = info->time_sleep;
-	philo->time_die = info->time_die;
-	philo->rest_bf_die = ft_get_time() + 5;
-	philo->begin = ft_get_time();
+	philo->time_die = info->time_die + 1;
 	philo->semaphore = s;
 	philo->speak = e;
 	philo->eat = info->eat;
@@ -39,26 +37,44 @@ void			*ft_live(void *arg)
 	t_philo *philo;
 
 	philo = (t_philo*)arg;
+	sem_wait(philo->start);
 	while (1)
 	{
 		if (philo->eat != 0)
-			if (ft_eat(philo) == 1 && philo->eat != 0)
-				if (ft_sleep(philo) == 1)
-					ft_think(philo);
+		{
+			if (ft_eat(philo) == 1)
+			{
+				ft_print(" is sleeping \n", philo);
+				usleep(philo->time_sleep * 1000);
+				ft_print(" is thinking \n", philo);
+				usleep(10);
+			}
+		}
+		else
+			return (NULL);
 	}
 }
 
 void			ft_thread(t_philo *philo, t_info *info)
 {
-	int i;
+	int		i;
+	sem_t	*start;
 
 	i = 0;
+	start = sem_open("start", O_CREAT, 0644, 0);
 	while (i < info->number)
 	{
+		philo[i].start = start;
+		philo[i].rest_bf_die = ft_get_time();
+		philo[i].begin = ft_get_time();
+		philo[i].is_dead = 0;
 		pthread_create(&philo[i].thread, NULL, ft_live, &philo[i]);
+		pthread_detach(philo[i].thread);
 		i++;
-		usleep(50);
 	}
+	i = -1;
+	while (++i < info->number)
+		sem_post(start);
 }
 
 int				ft_threading(t_info *info)
@@ -66,7 +82,6 @@ int				ft_threading(t_info *info)
 	t_philo			*philo;
 	sem_t			*semaphore;
 	sem_t			*speak;
-	struct timeval	before;
 	int				i;
 
 	i = 0;
@@ -82,8 +97,11 @@ int				ft_threading(t_info *info)
 		philo[i].number = i;
 		i++;
 	}
-	gettimeofday(&before, NULL);
 	ft_thread(philo, info);
 	ft_is_dead(philo, info);
+	sem_close(speak);
+	sem_close(semaphore);
+	sem_close(philo->start);
+	free(philo);
 	return (0);
 }

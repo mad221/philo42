@@ -38,8 +38,11 @@ void	ft_putnbr(long long nbr)
 
 void	ft_print(char *str, t_philo *philo)
 {
-	ft_putnbr(ft_get_time() - philo->begin);
-	ft_putstr(" philo ");
-	ft_putnbr(philo->number + 1);
-	ft_putstr(str);
+	if (philo->eat != 0)
+	{
+		ft_putnbr(ft_get_time() - philo->begin);
+		ft_putstr(" philo ");
+		ft_putnbr(philo->number + 1);
+		ft_putstr(str);
+	}
 }

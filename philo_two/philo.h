@@ -41,14 +41,14 @@ typedef struct	s_philo
 	int			philo_total;
 	long long	begin;
 	int			eat;
+	int			is_dead;
 	sem_t		*semaphore;
 	sem_t		*speak;
+	sem_t		*start;
 	pthread_t	thread;
 }				t_philo;
 
 void			ft_is_dead(t_philo *philo, t_info *info);
-int				ft_think(t_philo *philo);
-int				ft_sleep(t_philo *philo);
 int				ft_eat(t_philo *philo);
 int				ft_threading(t_info *info);
 int				ft_parsing(t_info *info, char **av, int ac);

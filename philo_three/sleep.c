@@ -44,8 +44,7 @@ void	ft_get_started(t_info *info, t_philo *philo, int i)
 		s = 0;
 		while (s < info->number)
 		{
-			sem_post(philo[s].speak);
-			sem_post(philo[s].speak);
+			sem_post(philo[s].start);
 			s++;
 		}
 	}
