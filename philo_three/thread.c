@@ -18,7 +18,7 @@ void	*ft_live(void *arg)
 
 	philo = (t_philo *)arg;
 	sem_wait(philo->start);
-	philo->rest_bf_die = ft_get_time() + 5;
+	philo->rest_bf_die = ft_get_time();
 	while (1)
 	{
 		if (philo->eat != 0)
@@ -47,6 +47,7 @@ void	ft_time_eat_bf(t_philo *philo, t_info *info)
 		{
 			sem_wait(philo->sem_eat);
 			i++;
+			philo[i].begin = ft_get_time();
 		}
 }
 

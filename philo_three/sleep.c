@@ -15,16 +15,17 @@
 void	*ft_dead(t_philo *philo, t_info *info)
 {
 	int	i;
+	int result;
 
 	i = -1;
 	while (1)
 	{
 		if (philo->eat != 0)
-			if (ft_get_time() - philo->rest_bf_die > philo->time_die + 5)
+			if ((result = ft_get_time() - philo->rest_bf_die) > philo->time_die)
 			{
 				philo->is_dead = 1;
 				info->dead = 1;
-				ft_print(" is dead \n", philo);
+				ft_print_dead(" is dead \n", philo, result);
 				if (philo->eat != -1)
 					while (++i < philo->philo_total)
 						sem_post(philo->sem_eat);

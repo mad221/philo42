@@ -44,3 +44,14 @@ void	ft_print(char *str, t_philo *philo)
 	if (philo->is_dead != 1)
 		sem_post(philo->speak);
 }
+
+void	ft_print_dead(char *str, t_philo *philo, int result)
+{
+	sem_wait(philo->speak);
+	ft_putnbr(result);
+	write(1, " philo ", 7);
+	ft_putnbr(philo->number + 1);
+	write(1, str, ft_strlen(str));
+	if (philo->is_dead != 1)
+		sem_post(philo->speak);
+}

@@ -34,7 +34,7 @@ void	ft_lets_go(t_philo *philo, t_info *info)
 	while (i > info->number)
 	{
 		pthread_mutex_unlock(&philo[i].start);
-		usleep(1);
+		usleep(15);
 		i++;
 	}
 }
