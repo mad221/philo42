@@ -29,7 +29,7 @@ void			ft_set_sem(t_philo *philo, sem_t *s, sem_t *e, sem_t *q)
 
 int				ft_set_value(t_philo *philo, t_info *info, int i)
 {
-	philo[i].number = i;
+	philo->number = i;
 	philo->philo_total = info->number + 1;
 	philo->time_eat = info->time_eat;
 	philo->time_sleep = info->time_sleep;
